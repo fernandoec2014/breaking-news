@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// Importaciones
+import React, { useEffect, useState } from 'react'
+
+import Service from './utils/service'
+import Header from './components/header'
+import Body from './components/body'
+import Footer from './components/footer'
 
 function App() {
+  const [news, setNews] = useState([])
+
+  useEffect(() => {
+    Service.getNews()
+      .then(response => {
+        setNews(response)
+      })
+      .catch(() => {
+        console.log('Error en consumo de servicio..')
+      })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {
+        news.map((item, index) => (
+          <>
+            <Header item={item} />
+            <Body item={item} />
+            <Footer item={item} />
+            <br />
+          </>
+        ))
+      }
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
