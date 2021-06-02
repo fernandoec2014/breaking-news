@@ -2,10 +2,10 @@ import React from 'react'
 
 const Header = ({ item }) => {
   return (
-    <div>
-      <label>{item.source}</label>&nbsp;&nbsp;
-      <label>{item.published_at}</label>
-    </div>
+    <header className='header'>
+      <div className='header__title'><strong>{item.source}</strong></div>
+      <span>{item.published_at}</span>
+    </header>
   )
 }
 

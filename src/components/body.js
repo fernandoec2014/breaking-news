@@ -3,10 +3,9 @@ import React from 'react'
 const Body = ({ item }) => {
   return (
     <div>
-      <label>{item.title}</label>
-      <br />
+      <h3>{item.title}</h3>
       <label>{item.description}</label>
-      <img src={item.image} alt={item.title} />
+      <br />
     </div >
   )
 }

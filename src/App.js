@@ -1,10 +1,12 @@
 // Importaciones
 import React, { useEffect, useState } from 'react'
-
+import './main.css';
 import Service from './utils/service'
-import Header from './components/header'
-import Body from './components/body'
-import Footer from './components/footer'
+import CardItem from './components/cardItem'
+
+
+import Grid from '@material-ui/core/Grid';
+
 
 function App() {
   const [news, setNews] = useState([])
@@ -21,16 +23,25 @@ function App() {
 
   return (
     <div>
-      {
-        news.map((item, index) => (
-          <>
-            <Header item={item} />
-            <Body item={item} />
-            <Footer item={item} />
-            <br />
-          </>
-        ))
-      }
+
+      <Grid container>
+        <Grid container item xs={12} justify='center' alignItems='center'>
+          <h2>Lista de Noticias</h2>
+        </Grid>
+      </Grid>
+
+      <Grid container >
+        <Grid container item xs={12} sm={12}>
+          {
+            news.map((item, index) => (
+              <>
+                <CardItem item={item} />
+              </>
+            ))
+          }
+        </Grid>
+      </Grid>
+
     </div>
   )
 }
