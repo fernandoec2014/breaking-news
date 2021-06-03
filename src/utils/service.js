@@ -10,6 +10,7 @@ const Service = () => {
           return response.data.data
         })
         .catch(err => {
+          console.log('Error en ejecución de servicio: ', err)
           return false
         })
     }
