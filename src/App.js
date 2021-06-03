@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './main.css';
 import Service from './utils/service'
 import CardItem from './components/cardItem'
-
+import Container from '@material-ui/core/Container';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -22,7 +22,7 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <Container fixed>
 
       <Grid container>
         <Grid container item xs={12} justify='center' alignItems='center'>
@@ -30,7 +30,7 @@ function App() {
         </Grid>
       </Grid>
 
-      <Grid container >
+      <Grid container style={{ minHeight: 'calc(100vh - 137px)', height: '100%' }}>
         <Grid container item xs={12} sm={12}>
           {
             news.map((item, index) => (
@@ -42,7 +42,7 @@ function App() {
         </Grid>
       </Grid>
 
-    </div>
+    </Container>
   )
 }
 
