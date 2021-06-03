@@ -1,11 +1,10 @@
 import React from 'react'
 import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 
 import Header from './header'
 import Footer from './footer'
 import Body from './body'
-
-import Grid from '@material-ui/core/Grid';
 
 const CardItem = ({ item }) => {
 
@@ -19,7 +18,7 @@ const CardItem = ({ item }) => {
 
           <Grid item xs={12} sm={8}>
             <Card
-              style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' ,border: 'none', boxShadow: 'none', paddingRight: 10 }} >
+              style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: 'none', boxShadow: 'none', paddingRight: 10 }} >
               <Header item={item} />
               <Body item={item} />
               <Footer item={item} />
@@ -27,12 +26,10 @@ const CardItem = ({ item }) => {
           </Grid>
 
           <Grid item xs={12} sm={4}>
-
             <Card
-              style={{ display: 'flex',flexDirection: 'column', border: 'none', boxShadow: 'none' }} >
+              style={{ display: 'flex', flexDirection: 'column', border: 'none', boxShadow: 'none' }} >
               <img src={item.image} alt='' />
             </Card>
-
           </Grid>
 
         </Grid>

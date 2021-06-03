@@ -1,12 +1,12 @@
 // Importaciones
 import React, { useEffect, useState } from 'react'
 import './main.css';
-import Service from './utils/service'
-import CardItem from './components/cardItem'
 import Container from '@material-ui/core/Container';
-
 import Grid from '@material-ui/core/Grid';
 
+import Service from './utils/service'
+import CardItem from './components/cardItem'
+import Search from './components/search';
 
 function App() {
   const [news, setNews] = useState([])
@@ -21,16 +21,35 @@ function App() {
       })
   }, [])
 
+
+  const searchFilter = (inputSearch) => {
+    if (inputSearch !== '') {
+      let dataFilter = news.filter((item) => (
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      ))
+      setNews(dataFilter)
+
+    } else {
+      Service.getNews()
+        .then(response => {
+          setNews(response)
+        })
+        .catch(() => {
+          console.log('Error en consumo de servicio..')
+        })
+    }
+  }
+
   return (
     <Container fixed>
-
       <Grid container>
         <Grid container item xs={12} justify='center' alignItems='center'>
-          <h2>Lista de Noticias</h2>
+          <Search searchFilter={searchFilter} />
         </Grid>
       </Grid>
 
-      <Grid container style={{ minHeight: 'calc(100vh - 137px)', height: '100%' }}>
+      <br />
+      <Grid container>
         <Grid container item xs={12} sm={12}>
           {
             news.map((item, index) => (
@@ -41,7 +60,6 @@ function App() {
           }
         </Grid>
       </Grid>
-
     </Container>
   )
 }
