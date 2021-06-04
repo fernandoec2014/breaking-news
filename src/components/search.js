@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Typography from '@material-ui/core/Typography'
 
 const Search = ({ searchFilter }) => {
 
@@ -15,17 +16,22 @@ const Search = ({ searchFilter }) => {
   }
 
   return (
-    <>      
-      <form onSubmit={handleSubmit}>
-        <h1>Breaking News</h1>
-        <input
-          type='text'
-          placeholder='Que buscar'
-          value={inputSearch}
-          onChange={handleInputSearch}
-        />
-        <button>Buscar</button>
-      </form>
+    <>
+      <div className='search'>
+        <Typography variant='h4' gutterBottom align='center'>
+          Breaking News
+        </Typography>
+
+        <form onSubmit={handleSubmit} className='searching'>
+          <input
+            type='search'
+            placeholder='Search news...'
+            value={inputSearch}
+            onChange={handleInputSearch}
+          />
+          <button className='btn-search'>Search</button>
+        </form>
+      </div>
     </>
   )
 }
