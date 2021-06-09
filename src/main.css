@@ -22,7 +22,11 @@ body{
 
 .header__title{
   text-transform: uppercase;
-  font-size: .9rem;
+  font-size: 1rem;
+}
+
+.footer{
+  font-size: .8rem;
 }
 
 .searching input {

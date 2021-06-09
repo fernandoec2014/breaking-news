@@ -3,9 +3,9 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-import Header from './header'
-import Footer from './footer'
-import Body from './body'
+import Header from './newsCard/header'
+import Footer from './newsCard/footer'
+import Body from './newsCard/body'
 
 const CardItem = ({ item }) => {
 

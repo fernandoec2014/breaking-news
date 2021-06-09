@@ -1,17 +1,17 @@
 // Importaciones
 import React, { useEffect, useState } from 'react'
 import './main.css';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Alert from '@material-ui/lab/Alert';
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
 
 import Service from './utils/service'
 import CardItem from './components/cardItem'
-import Search from './components/search';
+import Search from './components/search'
+import AlertBox from './components/alertBox'
 
 function App() {
   const [news, setNews] = useState([])
-  const [alerta, setAlerta] = useState(false)
+  const [alert, setAlert] = useState(false)
 
   useEffect(() => {
     Service.getNews()
@@ -19,22 +19,23 @@ function App() {
         setNews(response)
       })
       .catch(() => {
-        console.log('Error en consumo de servicio..')
+        console.log('Error en consumo de servicio.')
+        setAlert(true)
       })
   }, [])
 
-
   const searchFilter = (inputSearch) => {
+    setAlert(false)
     if (inputSearch !== '' && inputSearch.length > 0) {
       let dataFilter = news.filter((item) => (
         item.title.toLowerCase().includes(inputSearch.toLowerCase())
       ))
       // Validacion para lanzar alerta de busqueda vacia
       if (dataFilter.length > 0) {
-        setAlerta(false)
+        setAlert(false)
         setNews(dataFilter)
       } else {
-        setAlerta(true)
+        setAlert(true)
       }
 
     } else {
@@ -43,9 +44,29 @@ function App() {
           setNews(response)
         })
         .catch(() => {
-          console.log('Error en consumo de servicio..')
+          console.log('Error en consumo de servicio.')
+          setAlert(true)
         })
+    }
+  }
 
+  const renderAlert = (type, message) => {
+    return (
+      <Grid item xs={12} sm={12} >
+        <AlertBox level={type} message={message} />
+      </Grid>
+    )
+  }
+
+  const renderNews = (news) => {
+    if (news) {
+      return (
+        news.map((item, index) => (
+          <CardItem key={index} item={item} />
+        ))
+      )
+    } else {
+      return renderAlert('error', 'Service not available ')
     }
   }
 
@@ -56,20 +77,14 @@ function App() {
           <Search searchFilter={searchFilter} />
         </Grid>
         {
-          alerta && (
-            <Grid item xs={12} sm={12} >
-              <Alert severity='warning'>No existe información a mostrar .</Alert>
-            </Grid>
-          )
+          alert && renderAlert('warning', 'No search results.')
         }
       </Grid>
       <br />
       <Grid container>
         <Grid container item xs={12} sm={12} >
           {
-            news.map((item, index) => (
-              <CardItem key={index} item={item} />
-            ))
+            renderNews(news)
           }
         </Grid>
       </Grid>
